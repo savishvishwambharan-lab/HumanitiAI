@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>TyreSense Fleet: All Findings</title>
+<style>
+:root{--bg:#f4f1ea;--fg:#14202b;--mut:#5b6670;--card:#fff;--line:#ddd8cc;--acc:#c85a12;--ok:#2b7a4b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14202b;--fg:#f4f1ea;--mut:#a3aeb6;--card:#1e3042;--line:#2f4357;--acc:#f08a45;--ok:#6cc08f}}
+:root[data-theme="dark"]{--bg:#14202b;--fg:#f4f1ea;--mut:#a3aeb6;--card:#1e3042;--line:#2f4357;--acc:#f08a45;--ok:#6cc08f}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 Inter,system-ui,sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 20px 64px}
+h1{font:600 36px/1.15 'Space Grotesk',Inter,sans-serif;margin:0 0 8px}h2{font:600 26px 'Space Grotesk',Inter,sans-serif;margin:44px 0 12px}h3{margin:0 0 6px;font-size:18px}
+.sub{color:var(--mut)}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+.tag{display:inline-block;font-size:13px;font-weight:600;padding:1px 9px;border-radius:99px;border:1px solid var(--acc);color:var(--acc);margin-right:6px}.tag.ok{border-color:var(--ok);color:var(--ok)}
+.w{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+li{margin:6px 0}
+</style></head><body><main>
+<h1>TyreSense fleet findings</h1><p class="sub">Six trucks, 14 tyres each (axles 1 to 5), 1 Jun to 15 Jul 2026. Compiled from the TyreSense briefs; no manufacturer PSI or temperature spec was available, so “low” is relative to other tyres and an 85 PSI cut-off used in the briefs.</p>
+
+<h2>Priority actions</h2>
+<div class="card"><span class="tag">1</span><b>KA25AC1182 tyre 5RI blowout (11 Jul).</b> Pressure fell from about 102 to 13.9 PSI (about 87%) between 04:00 and 14:17, roughly 8 to 9 PSI an hour, while the truck was tracked. About 8 hours below its siblings before the sensor went silent; it returned next morning at about 100 PSI with battery 50% to 97%, which looks like a repair and sensor swap. Check why no alert fired.</div>
+<div class="card"><span class="tag">2</span><b>Replace failing sensors:</b> KA48AF9054 2RO (battery 1%, most urgent), KA22AD7730 5RO, KA25AC1182 3LO, KA25AB4471 4LI.</div>
+<div class="card"><span class="tag">3</span><b>Investigate rear-axle heat</b> on KA25AB4471 (alternate-day 08:00 events) and KA25AC1182 (left inner duals).</div>
+<div class="card"><span class="tag">4</span><b>Leak-test KA22AD7730 5RO</b> rather than topping up again.</div>
+<div class="card"><span class="tag">5</span><b>Confirm cold-pressure targets</b> per axle and set an inflation routine.</div>
+
+<h2>Findings by truck</h2>
+<div class="w"><table><tr><th>Truck</th><th>Status</th><th>Key points</th></tr>
+<tr><td>KA25AC1182</td><td><span class="tag">Act</span></td><td>5RI blowout 11 Jul; 3LO sensor degrading (battery 62% to 49% in July, about 0.9 points a day, 5.5% missing); axle 4/5 heat to 82.9°C in June (78°C in July; 4LI and 5LI had 787 and 838 readings above 70°C in July; no readings above 80°C in July against about 144 in June); hot pressure 131 to 141 PSI; new mismatch after 5 Jul, 5LI about 4 PSI over 5LO and 2RO about 4 PSI over 2LO; GPS missing on 13 to 16% of rows.</td></tr>
+<tr><td>KA25AB4471</td><td><span class="tag">Act</span></td><td>All 8 rear tyres reach 64 to 73°C on alternate days around 08:00: 13 days in June, 6 in July (2, 4, 7, 9, 11, 14 Jul). Peak 73.4°C on 5RI; readings above 70°C in June: 5RI 186, 4LO 73, 4RO 32. Pressures climb to 129 to 135 PSI. GPS gaps fall on the same days (16 to 19% of rows). 4LI battery 60% to 48% and coverage 94.5%; 4LI runs about 2.5 PSI under 4LO (4.7 in June). 3LO and 3RO batteries swapped on 28 Jun, so labels or sensors may have been exchanged. Vehicle label reads “KA25B4471” in the July file; fix before merging.</td></tr>
+<tr><td>KA22AD7730</td><td><span class="tag">Act</span></td><td>5RO is the weak tyre for a second month: low of 79.5 PSI on 2 Jul, reset to 87 on 4 Jul, back to about 83.6 PSI by 15 Jul (about 0.3 PSI a day). In June its daily low slid from 83 to 75 PSI and it ran about 11 PSI under 5RI. Battery 54% to 43% in July, 5.5% readings missing. June also had a fleet-wide 10 PSI drop (5 to 8 Jun) and four tyres on axles 4 and 5 dropping 9 to 12 PSI at 15:51 on 5 Jun with no temperature change. Otherwise cooler in July (max 58°C).</td></tr>
+<tr><td>KA48AF9054</td><td><span class="tag">Act</span></td><td>2RO battery 14% (1 Jun) to 5% (1 Jul) to 1% (15 Jul), missing readings rising to 60 to 100 a day by end of June. Cold pressure fell 5 to 7 PSI over June (about 1 to 1.5 PSI of it from cooler nights); drive axles ended June near 88 to 89 PSI. 5RI and 5RO were bled about 4 to 5 PSI on 8 Jun and topped up 22 Jun. July: rear axles run hottest (peak 55.7°C on 5LO), jump of about 10 PSI on 14 and 15 Jul, lows of 84 to 86 PSI on axles 4 and 5, 4.3% GPS missing.</td></tr>
+<tr><td>KA25AE2016</td><td><span class="tag ok">Watch</span></td><td>June: cold pressure fell 7 to 9 PSI on drive axles from 1 to 17 Jun (low 80.7 PSI on 5RI), corrected on 18 Jun; 4LI and 5LI dropped 8 and 5 PSI on 4 Jun at 15:45, likely a deliberate bleed-down. July: healthy, inflation visit 2 Jul (+5.8 PSI on 2LO, +6.8 on 5RI), stable since, peak 50.9°C (57.4°C in June). Lowest battery 4RI at 50%; 5LI about 2 to 3 PSI over 5LO.</td></tr>
+<tr><td>KA22AG3391</td><td><span class="tag ok">OK</span></td><td>No tyre below 85 PSI, no sudden drops, dual gaps 0.6 to 1.9 PSI. Heat peak 63.8°C on axle 4 right in early June, nothing above 58°C in July. Lowest batteries 4LI (54%), 4RO, 1LO, 5RI; 4LI about 2 PSI under 4LO.</td></tr></table></div>
+
+<h2>Cross-fleet patterns</h2>
+<div class="card"><h3>Batteries</h3>Fleet averages ran 64 to 72% by mid-July, with most sensors losing 4 to 6 points in 15 days and 7 to 22 points across June. Outliers drain two to three times faster: 2RO, 5RO, 3LO, 4LI.</div>
+<div class="card"><h3>Inflation visits</h3>Step increases of 4 to 9 PSI recur (18 Jun and 2 Jul on KA25AE2016, 22 Jun on KA48AF9054, 20 Jun on KA22AD7730), and several sudden drops look like deliberate bleed-downs. Without a log these cannot be told apart from leaks.</div>
+<div class="card"><h3>Temperature effects</h3>Sunday and cold-night dips of 6 to 10 PSI are thermal, not leaks.</div>
+<div class="card"><h3>Data quality</h3>Sampling is about 18 seconds moving and about 2 minutes parked (an earlier brief said 2 minutes throughout). July files overlap June by 12 hours (30 Jun 18:00 to 1 Jul 06:00); drop the overlap when merging. GPS gaps: KA25AC1182 13 to 16%, KA25AB4471 16 to 19%, others 1 to 4%. KA48AF9054 and KA25AE2016 briefs contain label confusion with KA25AC1182; confirm vehicle IDs per file.</div>
+
+<h2>Five questions for the fleet manager</h2>
+<ol>
+<li><b>What are the specified cold pressures and maximum temperatures for each axle?</b> Every “low” and “hot” call here is relative. With the spec I would re-flag all tyres, starting with the 84 to 88 PSI drive axles.</li>
+<li><b>Did a low-pressure alert fire for 5RI on 11 Jul, and who received it?</b> The tyre was visibly failing for about 8 hours. I would audit thresholds, rates of fall and alert routing.</li>
+<li><b>What happens on KA25AB4471 at 08:00 on alternate days (route, load, trailer, braking)?</b> The heat is operational and has persisted for two months. I would match trip logs to the hot days and inspect brakes and rear tyres.</li>
+<li><b>Who inflates or bleeds tyres, and is it logged?</b> Without records I cannot separate leaks from maintenance. I would reconcile pressure steps and drops with the log and set a target-pressure routine.</li>
+<li><b>What is the sensor replacement process, and are 2RO, 5RO, 3LO and 4LI scheduled?</b> 2RO at 1% will stop reporting soon. I would build a replacement order by battery level and confirm the 3LO/3RO swap with the workshop.</li></ol>
+</main></body></html>
